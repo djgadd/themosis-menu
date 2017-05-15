@@ -30,8 +30,8 @@ See the [Laravel docs](https://github.com/Seldaek/monolog/blob/master/doc/01-usa
 ## Helpers
 The following (additional) helpers are available: -
 
-* getMenuById(1)
-* getMenuByLocation('header-nav')
+* getMenuById(int $menuId, int $activePostId = null)
+* getMenuByLocation(string $location, int $activePostId = null)
 
 ## To Do
 
