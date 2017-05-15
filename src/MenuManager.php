@@ -2,8 +2,13 @@
 
 namespace KeltieCochrane\Menu;
 
+use Illuminate\Support\Collection;
+
 class MenuManager
 {
+  /**
+   * @var \Illuminate\Support\Collection
+   */
   protected $locations;
 
   /**
@@ -11,14 +16,14 @@ class MenuManager
    */
   public function __construct ()
   {
-    $this->locations = get_nav_menu_locations();
+    $this->locations = collect(get_nav_menu_locations());
   }
 
   /**
    * Gets a menu by ID
    *
    * @param int $id
-   * @param $activePostId
+   * @param int $activePostId
    * @return \KeltieCochrane\Menu\Menu
    */
   public function get (int $id, int $activePostId = null) : Menu
@@ -52,9 +57,9 @@ class MenuManager
   /**
    * Returns the themes locations
    *
-   * @return array
+   * @return \Illuminate\Support\Collection
    */
-  public function getLocations () : array
+  public function getLocations () : Collection
   {
     return $this->locations;
   }
