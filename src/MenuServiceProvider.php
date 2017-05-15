@@ -26,7 +26,7 @@ class MenuServiceProvider extends ServiceProvider
     });
 
     // Handle the cache when menu's change
-    Action::add('wp_update_nav_menu', function ($menuId) {
+    app('action')->add('wp_update_nav_menu', function ($menuId) {
       app('menu')->clear($menuId);
     });
   }
