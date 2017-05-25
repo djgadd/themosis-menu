@@ -68,21 +68,19 @@ class Menu
    */
   protected function buildMenu () : Collection
   {
-    $items = collect(wp_get_nav_menu_items($this->menu->term_id))->sortByDesc('menu_item_parent');
+    $items = wp_get_nav_menu_items($this->menu->term_id);
+    _wp_menu_item_classes_by_context($items);
 
-    // Group children and mark active and active descendant items
+    // Collect the items and sort by the menu parent, which will ensure we have
+    // an item with it's complete list of descendants
+    $items = collect($items)->sortByDesc('menu_item_parent');
+
+    // Group children
     foreach ($items as &$item) {
       $item->children = $items->where('menu_item_parent', '=', $item->ID);
-      $item->descendants = $item->children->pluck('object_id')
-        ->merge($item->children->map(function ($child) {
-          return $child->descendants;
-        })->flatten());
-
-      // Mark active items
-      $item->active = $item->object_id == $this->activePostId;
-      $item->active_descendant = $item->descendants->contains($this->activePostId);
     }
 
+    // Get top level items and sort by menu_order
     return $items->where('menu_item_parent', '=', 0)->sortBy('menu_order');
   }
 
