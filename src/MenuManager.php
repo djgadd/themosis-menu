@@ -47,11 +47,11 @@ class MenuManager
    * Clears a menu from the cache, useful for when menus are updated
    *
    * @param string $id
-   * @return bool
+   * @return void
    */
-  public function clear (int $id) : bool
+  public function clear (int $id)
   {
-    return app('cache')->tags(['menus', $id])->flush();
+    app('cache')->tags(['menus', $id])->flush();
   }
 
   /**
