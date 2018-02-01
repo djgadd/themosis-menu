@@ -1,7 +1,7 @@
 {
   "name": "djgadd/themosis-menu",
   "description": "A package to make working with menus easier.",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "keywords": ["themosis"],
   "authors": [
     {
